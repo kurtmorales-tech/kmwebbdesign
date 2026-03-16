@@ -1,6 +1,6 @@
 # Kmwebdesign | Digital Excellence Agency
 
-![Kmwebdesign Banner](https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=2426&ixlib=rb-4.0.3)
+![Kmwebdesign Admin Dashboard](./public/admin-dashboard.png)
 
 Kmwebdesign is a premium, high-performance digital agency platform built for modern businesses. It combines cutting-edge design aesthetics with enterprise-grade technical architecture to deliver an immersive user experience.
 

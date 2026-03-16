@@ -59,15 +59,15 @@ const SidebarItem = ({ icon: Icon, label, active, onClick, isSidebarOpen }: any)
     onClick={onClick}
     className={`w-full flex items-center relative group ${isSidebarOpen ? 'px-4' : 'px-3 justify-center'} py-3.5 rounded-2xl transition-all duration-300 ${
       active 
-        ? 'bg-blue-600 text-white shadow-xl shadow-blue-500/20' 
-        : 'text-slate-400 hover:bg-slate-800/50 hover:text-slate-100'
+        ? 'bg-blue-600 text-slate-900 dark:text-white shadow-xl shadow-blue-500/20' 
+        : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-100 dark:bg-slate-800/50 hover:text-slate-700 dark:text-slate-100'
     }`}
   >
     <Icon size={22} className={`shrink-0 transition-transform duration-300 ${active ? 'scale-110' : 'group-hover:scale-110'}`} />
     {isSidebarOpen ? (
       <span className="font-bold ml-4 tracking-tight text-sm truncate">{label}</span>
     ) : (
-      <div className="absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 bg-slate-900 text-white text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none transition-all duration-300 whitespace-nowrap z-50 border border-slate-700 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
+      <div className="absolute left-[calc(100%+12px)] top-1/2 -translate-y-1/2 bg-slate-900 text-slate-900 dark:text-white text-[10px] font-black tracking-widest uppercase px-3 py-1.5 rounded-lg opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 pointer-events-none transition-all duration-300 whitespace-nowrap z-50 border border-slate-700 shadow-[0_10px_30px_rgba(0,0,0,0.5)]">
         {label}
         <div className="absolute left-0 top-1/2 -translate-y-1/2 -ml-1 w-2 h-2 bg-slate-900 border-l border-b border-slate-700 transform rotate-45"></div>
       </div>
@@ -76,9 +76,9 @@ const SidebarItem = ({ icon: Icon, label, active, onClick, isSidebarOpen }: any)
 );
 
 const Card = ({ title, children, extra }: any) => (
-  <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
+  <div className="bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 rounded-2xl p-6 backdrop-blur-sm">
     <div className="flex justify-between items-center mb-6">
-      <h3 className="text-lg font-semibold text-white">{title}</h3>
+      <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{title}</h3>
       {extra}
     </div>
     {children}
@@ -86,9 +86,9 @@ const Card = ({ title, children, extra }: any) => (
 );
 
 const StatCard = ({ title, value, change, trend, icon: Icon }: any) => (
-  <div className="bg-slate-900/50 border border-slate-800 rounded-2xl p-5 backdrop-blur-sm">
+  <div className="bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 rounded-2xl p-5 backdrop-blur-sm">
     <div className="flex justify-between items-start mb-4">
-      <div className="p-2 bg-slate-800 rounded-lg text-blue-400">
+      <div className="p-2 bg-slate-100 dark:bg-slate-800 rounded-lg text-blue-400">
         <Icon size={24} />
       </div>
       <div className={`flex items-center text-sm ${trend === 'up' ? 'text-emerald-400' : 'text-rose-400'}`}>
@@ -96,8 +96,8 @@ const StatCard = ({ title, value, change, trend, icon: Icon }: any) => (
         {trend === 'up' ? <ArrowUpRight size={16} /> : <ArrowDownRight size={16} />}
       </div>
     </div>
-    <h4 className="text-slate-400 text-sm font-medium">{title}</h4>
-    <p className="text-2xl font-bold text-white mt-1">{value}</p>
+    <h4 className="text-slate-500 dark:text-slate-400 text-sm font-medium">{title}</h4>
+    <p className="text-2xl font-bold text-slate-900 dark:text-white mt-1">{value}</p>
   </div>
 );
 
@@ -177,18 +177,18 @@ const AdminDashboard: React.FC = () => {
               <div className="overflow-x-auto">
                 <table className="w-full text-left">
                   <thead>
-                    <tr className="border-b border-slate-800 text-slate-400 text-sm">
+                    <tr className="border-b border-slate-200 dark:border-slate-800 text-slate-500 dark:text-slate-400 text-sm">
                       <th className="pb-4 font-medium">Customer</th>
                       <th className="pb-4 font-medium">Status</th>
                       <th className="pb-4 font-medium">Date</th>
                       <th className="pb-4 font-medium text-right">Amount</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-slate-800/50">
+                  <tbody className="divide-y divide-slate-200 dark:divide-slate-800/50">
                     {RECENT_BOOKINGS.map((booking) => (
-                      <tr key={booking.id} className="text-slate-100 text-sm">
+                      <tr key={booking.id} className="text-slate-700 dark:text-slate-100 text-sm">
                         <td className="py-4">
-                          <div className="font-medium text-white">{booking.customer}</div>
+                          <div className="font-medium text-slate-900 dark:text-white">{booking.customer}</div>
                           <div className="text-xs text-slate-500">{booking.service}</div>
                         </td>
                         <td className="py-4">
@@ -199,8 +199,8 @@ const AdminDashboard: React.FC = () => {
                             {booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}
                           </span>
                         </td>
-                        <td className="py-4 text-slate-400">{booking.date}</td>
-                        <td className="py-4 text-right font-semibold text-white">{booking.amount}</td>
+                        <td className="py-4 text-slate-500 dark:text-slate-400">{booking.date}</td>
+                        <td className="py-4 text-right font-semibold text-slate-900 dark:text-white">{booking.amount}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -217,8 +217,8 @@ const AdminDashboard: React.FC = () => {
         return (
           <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
             <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-white">User Management</h2>
-              <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl transition-colors">
+              <h2 className="text-2xl font-bold text-slate-900 dark:text-white">User Management</h2>
+              <button className="flex items-center space-x-2 bg-blue-600 hover:bg-blue-700 text-slate-900 dark:text-white px-4 py-2 rounded-xl transition-colors">
                 <Plus size={20} />
                 <span>Invite User</span>
               </button>
@@ -228,7 +228,7 @@ const AdminDashboard: React.FC = () => {
                 {TEAM.map(user => (
                   <div 
                     key={user.id} 
-                    className="bg-slate-800/30 border border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors cursor-pointer group"
+                    className="bg-slate-100 dark:bg-slate-50 dark:bg-slate-800/30 border border-slate-200 dark:border-slate-800 p-6 rounded-2xl hover:border-blue-500/50 transition-colors cursor-pointer group"
                     onClick={() => navigate(`/admin/team/${user.id}`)}
                   >
                     <div className="flex items-center space-x-4 mb-4">
@@ -236,12 +236,12 @@ const AdminDashboard: React.FC = () => {
                         <img src={user.imageUrl} alt={user.name} className="w-full h-full object-cover" />
                       </div>
                       <div>
-                        <h4 className="text-white font-semibold group-hover:text-blue-400 transition-colors">{user.name}</h4>
-                        <p className="text-sm text-slate-400 truncate w-32">{user.role}</p>
+                        <h4 className="text-slate-900 dark:text-white font-semibold group-hover:text-blue-400 transition-colors">{user.name}</h4>
+                        <p className="text-sm text-slate-500 dark:text-slate-400 truncate w-32">{user.role}</p>
                       </div>
                     </div>
-                    <div className="flex justify-between items-center pt-4 border-t border-slate-800">
-                      <span className="text-xs font-medium px-2 py-1 bg-slate-800 rounded text-slate-300">Active</span>
+                    <div className="flex justify-between items-center pt-4 border-t border-slate-200 dark:border-slate-800">
+                      <span className="text-xs font-medium px-2 py-1 bg-slate-100 dark:bg-slate-800 rounded text-slate-300">Active</span>
                       <button className="text-blue-400 text-sm hover:underline">View Details</button>
                     </div>
                   </div>
@@ -254,27 +254,27 @@ const AdminDashboard: React.FC = () => {
       case 'settings':
         return (
           <div className="max-w-4xl space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-            <h2 className="text-2xl font-bold text-white">System Settings</h2>
+            <h2 className="text-2xl font-bold text-slate-900 dark:text-white">System Settings</h2>
             <Card title="General Appearance">
               <div className="space-y-6">
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-white font-medium">Dark Mode</h4>
-                    <p className="text-sm text-slate-400">Toggle the public site appearance</p>
+                    <h4 className="text-slate-900 dark:text-white font-medium">Dark Mode</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Toggle the public site appearance</p>
                   </div>
                   <button 
                     onClick={toggleTheme}
-                    className={`w-12 h-6 rounded-full relative transition-colors duration-300 ${theme === 'dark' ? 'bg-blue-600' : 'bg-slate-700'}`}
+                    className={`w-12 h-6 rounded-full relative transition-colors duration-300 ${theme === 'dark' ? 'bg-blue-600' : 'bg-slate-300 dark:bg-slate-700'}`}
                   >
-                    <div className={`absolute top-1 w-4 h-4 bg-white rounded-full transition-transform duration-300 ${theme === 'dark' ? 'left-7' : 'left-1'}`}></div>
+                    <div className={`absolute top-1 w-4 h-4 bg-white dark:bg-white rounded-full transition-transform duration-300 ${theme === 'dark' ? 'translate-x-7' : 'translate-x-1'}`}></div>
                   </button>
                 </div>
                 <div className="flex items-center justify-between">
                   <div>
-                    <h4 className="text-white font-medium">Email Notifications</h4>
-                    <p className="text-sm text-slate-400">Receive alerts for new bookings</p>
+                    <h4 className="text-slate-900 dark:text-white font-medium">Email Notifications</h4>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">Receive alerts for new bookings</p>
                   </div>
-                  <div className="w-12 h-6 bg-slate-700 rounded-full relative cursor-pointer">
+                  <div className="w-12 h-6 bg-slate-300 dark:bg-slate-700 rounded-full relative cursor-pointer">
                     <div className="absolute left-1 top-1 w-4 h-4 bg-white rounded-full"></div>
                   </div>
                 </div>
@@ -283,12 +283,12 @@ const AdminDashboard: React.FC = () => {
             <Card title="Integrations">
                <div className="space-y-4">
                  {['Stripe Payments', 'Slack Alerts', 'Google Calendar'].map((app) => (
-                   <div key={app} className="flex items-center justify-between p-4 bg-slate-800/20 border border-slate-800 rounded-xl">
+                   <div key={app} className="flex items-center justify-between p-4 bg-slate-100 dark:bg-slate-800/20 border border-slate-200 dark:border-slate-800 rounded-xl">
                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-slate-800 rounded-lg"></div>
-                        <span className="text-white font-medium">{app}</span>
+                        <div className="w-10 h-10 bg-slate-100 dark:bg-slate-800 rounded-lg"></div>
+                        <span className="text-slate-900 dark:text-white font-medium">{app}</span>
                      </div>
-                     <button className="text-xs text-slate-400 border border-slate-700 px-3 py-1 rounded-lg hover:bg-slate-800 transition-colors">Configure</button>
+                     <button className="text-xs text-slate-500 dark:text-slate-400 border border-slate-700 px-3 py-1 rounded-lg hover:bg-slate-100 dark:bg-slate-800 transition-colors">Configure</button>
                    </div>
                  ))}
                </div>
@@ -297,20 +297,20 @@ const AdminDashboard: React.FC = () => {
         );
 
       default:
-        return <div className="text-white">Content for {activeTab} coming soon...</div>;
+        return <div className="text-slate-900 dark:text-white">Content for {activeTab} coming soon...</div>;
     }
   };
 
   return (
     <>
-      <SEO title="Vortex Dashboard" description="Admin management area" />
-      <div className="min-h-screen bg-[#050505] text-slate-200 flex font-sans selection:bg-blue-500/30">
-        <aside className={`${isSidebarOpen ? 'w-64' : 'w-20'} border-r border-slate-800 transition-all duration-300 hidden md:flex flex-col bg-[#080808]`}>
+      <SEO title="kmwebdesign Dashboard" description="Admin management area" />
+      <div className="min-h-screen bg-slate-50 dark:bg-[#050505] text-slate-900 dark:text-slate-200 flex font-sans selection:bg-blue-500/30">
+        <aside className={`${isSidebarOpen ? 'w-64' : 'w-20'} border-r border-slate-200 dark:border-slate-800 transition-all duration-300 hidden md:flex flex-col bg-white dark:bg-[#080808]`}>
           <div className={`p-6 flex items-center ${isSidebarOpen ? 'space-x-3' : 'justify-center'}`}>
             <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center shrink-0">
-              <LayoutDashboard className="text-white" size={20} />
+              <LayoutDashboard className="text-slate-900 dark:text-white" size={20} />
             </div>
-            {isSidebarOpen && <span className="text-xl font-bold text-white tracking-tight">Vortex<span className="text-blue-500">UI</span></span>}
+            {isSidebarOpen && <span className="text-xl font-bold text-slate-900 dark:text-white tracking-tight">km<span className="text-blue-500">webdesign</span></span>}
           </div>
 
           <nav className="flex-1 px-3 space-y-1 mt-4">
@@ -323,32 +323,32 @@ const AdminDashboard: React.FC = () => {
             {isSidebarOpen ? (
               <div className="pt-4 pb-2 px-4 text-[10px] font-bold text-slate-500 uppercase tracking-widest">Preferences</div>
             ) : (
-               <div className="pt-4 pb-2 flex justify-center"><div className="w-4 h-[1px] bg-slate-800"></div></div>
+               <div className="pt-4 pb-2 flex justify-center"><div className="w-4 h-[1px] bg-slate-100 dark:bg-slate-800"></div></div>
             )}
             
             <SidebarItem icon={Settings} label="Settings" active={activeTab === 'settings'} onClick={() => setActiveTab('settings')} isSidebarOpen={isSidebarOpen} />
           </nav>
 
-          <div className="p-4 border-t border-slate-800">
+          <div className="p-4 border-t border-slate-200 dark:border-slate-800">
             <div className={`flex items-center ${isSidebarOpen ? 'space-x-3' : 'justify-center'} p-2`}>
-              <div className="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 overflow-hidden cursor-pointer" onClick={() => setSidebarOpen(!isSidebarOpen)}>
+              <div className="w-10 h-10 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-700 flex items-center justify-center shrink-0 overflow-hidden cursor-pointer" onClick={() => setSidebarOpen(!isSidebarOpen)}>
                 <img src="https://ui-avatars.com/api/?name=Admin+User&background=3b82f6&color=fff" alt="Avatar" />
               </div>
               {isSidebarOpen && (
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-white truncate">Marcus Vane</p>
+                  <p className="text-sm font-semibold text-slate-900 dark:text-white truncate">Marcus Vane</p>
                   <p className="text-xs text-slate-500 truncate">Super Admin</p>
                 </div>
               )}
-              {isSidebarOpen && <LogOut size={16} className="text-slate-500 cursor-pointer hover:text-white" onClick={handleLogout} />}
+              {isSidebarOpen && <LogOut size={16} className="text-slate-500 cursor-pointer hover:text-slate-900 dark:text-white" onClick={handleLogout} />}
             </div>
           </div>
         </aside>
 
         <main className="flex-1 flex flex-col h-screen overflow-hidden">
-          <header className="h-16 border-b border-slate-800 bg-[#080808]/80 backdrop-blur-xl flex items-center justify-between px-8 shrink-0 z-10">
+          <header className="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-[#080808]/80 backdrop-blur-xl flex items-center justify-between px-8 shrink-0 z-10">
             <div className="flex items-center">
-                <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="mr-4 text-slate-400 hover:text-white md:hidden">
+                <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="mr-4 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white md:hidden">
                     <LayoutDashboard size={20} />
                 </button>
 
@@ -357,7 +357,7 @@ const AdminDashboard: React.FC = () => {
                   <input 
                     type="text" 
                     placeholder="Search data, users, bookings..." 
-                    className="bg-slate-900/50 border border-slate-800 rounded-xl py-2 pl-10 pr-4 w-64 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
+                    className="bg-white dark:bg-slate-900/50 shadow-sm dark:shadow-none border border-slate-200 dark:border-slate-800 rounded-xl py-2 pl-10 pr-4 w-64 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500/50 transition-all"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                   />
@@ -366,17 +366,17 @@ const AdminDashboard: React.FC = () => {
             <div className="flex items-center space-x-4">
               <button 
                 onClick={toggleTheme}
-                className="p-2 text-slate-400 hover:text-white transition-colors"
+                className="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors"
                 title="Toggle Public Theme"
               >
                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
               </button>
-              <button className="relative p-2 text-slate-400 hover:text-white transition-colors">
+              <button className="relative p-2 text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:text-white transition-colors">
                 <Bell size={20} />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-blue-500 rounded-full border-2 border-[#080808]"></span>
               </button>
-              <div className="h-8 w-[1px] bg-slate-800 mx-2"></div>
-              <button className="flex items-center space-x-2 text-sm font-medium text-white hover:text-blue-400 transition-colors" onClick={() => window.open('/', '_blank')}>
+              <div className="h-8 w-[1px] bg-slate-100 dark:bg-slate-800 mx-2"></div>
+              <button className="flex items-center space-x-2 text-sm font-medium text-slate-900 dark:text-white hover:text-blue-400 transition-colors" onClick={() => window.open('/', '_blank')}>
                 <span>View Site</span>
                 <ArrowUpRight size={16} />
               </button>
@@ -386,10 +386,10 @@ const AdminDashboard: React.FC = () => {
           <div className="flex-1 overflow-y-auto p-8 custom-scrollbar">
             <div className="max-w-7xl mx-auto">
               <div className="mb-8">
-                <h1 className="text-3xl font-bold text-white tracking-tight capitalize">
+                <h1 className="text-3xl font-bold text-slate-900 dark:text-white tracking-tight capitalize">
                   {activeTab === 'dashboard' ? 'Good morning, Marcus' : activeTab === 'marketing' ? 'Marketing AI' : activeTab}
                 </h1>
-                <p className="text-slate-400 mt-1">Here's what's happening with your business today.</p>
+                <p className="text-slate-500 dark:text-slate-400 mt-1">Here's what's happening with your business today.</p>
               </div>
               
               {renderContent()}
