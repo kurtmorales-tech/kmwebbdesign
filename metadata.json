@@ -1,0 +1,7 @@
+{
+  "name": "Kmwebdesign",
+  "description": "A fully responsive, SEO-optimized digital agency website for Kmwebdesign, featuring portfolio, services, and contact capabilities.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
