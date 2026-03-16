@@ -24,7 +24,6 @@ const AIAuditTool: React.FC = () => {
     setAuditResult(null);
 
     try {
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
       const prompt = `Perform a high-level digital audit for a potential client with the website or business name: "${url}". 
                      Give 3 specific, actionable points for improvement across: 
                      1. Web Design/UX 
@@ -32,8 +31,11 @@ const AIAuditTool: React.FC = () => {
                      3. Conversion Strategy.
                      Format as a punchy, professional list of key opportunities. Bold the headlines. Keep it under 200 words.`;
 
-      const result = await model.generateContent(prompt);
-      setAuditResult(result.response.text());
+      const result = await genAI.models.generateContent({
+        model: 'gemini-1.5-flash',
+        contents: prompt
+      });
+      setAuditResult(result.text);
     } catch (error) {
       console.error("Audit failed:", error);
       setAuditResult(

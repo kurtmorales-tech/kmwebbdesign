@@ -17,12 +17,14 @@ const AIMarketingSuite: React.FC = () => {
     setResult(null);
     setSources([]);
     try {
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const response = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: "What are the top 5 digital marketing and web design trends for agencies in late 2024 and early 2025? Provide a concise summary for each." }] }],
-        tools: [{ googleSearch: {} } as any],
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: "What are the top 5 digital marketing and web design trends for agencies in late 2024 and early 2025? Provide a concise summary for each.",
+        config: {
+          tools: [{ googleSearch: {} } as any]
+        }
       });
-      setResult(response.response.text() || "No response generated.");
+      setResult(response.text || "No response generated.");
       // Grounding metadata access depends on actual SDK version/structure, keeping simple for demo
     } catch (err) {
       setResult("Error fetching trends. Please check your connection.");
@@ -47,11 +49,11 @@ const AIMarketingSuite: React.FC = () => {
     }
 
     try {
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const response = await model.generateContent({
-        contents: [{ role: "user", parts: [{ text: "Find highly-rated web design and SEO agencies near my location in Las Vegas. List their names and what they seem to specialize in." }] }],
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: "Find highly-rated web design and SEO agencies near my location in Las Vegas. List their names and what they seem to specialize in.",
       });
-      setResult(response.response.text() || "No competitors found.");
+      setResult(response.text || "No competitors found.");
     } catch (err) {
       setResult("Error mapping competitors.");
     } finally {
@@ -63,12 +65,14 @@ const AIMarketingSuite: React.FC = () => {
     setLoading(true);
     setResult(null);
     try {
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-pro" });
-      const response = await model.generateContent(`Develop a comprehensive, multi-channel marketing strategy for 'Kmwebdesign', a digital agency based in Las Vegas. 
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-pro",
+        contents: `Develop a comprehensive, multi-channel marketing strategy for 'Kmwebdesign', a digital agency based in Las Vegas. 
                   Target: Small to medium businesses needing high-performance websites. 
                   Goal: Increase leads by 50% in 6 months.
-                  Include: Content strategy, Paid ads approach, and Local networking tips.`);
-      setResult(response.response.text() || "Strategy generation failed.");
+                  Include: Content strategy, Paid ads approach, and Local networking tips.`
+      });
+      setResult(response.text || "Strategy generation failed.");
     } catch (err) {
       setResult("Deep reasoning failed. Try again.");
     } finally {
@@ -81,7 +85,6 @@ const AIMarketingSuite: React.FC = () => {
     setLoading(true);
     setResult(null);
     try {
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-pro" });
       const fullPrompt = `You are a Senior Project Manager at Kmwebdesign. Based on this client request: "${prompt}", generate a professional Project Brief.
                          Include:
                          1. Executive Summary
@@ -90,8 +93,11 @@ const AIMarketingSuite: React.FC = () => {
                          4. Estimated Timeline (Phases)
                          5. Risk Assessment
                          Make it detailed, technically sound, and ready to send to a client.`;
-      const response = await model.generateContent(fullPrompt);
-      setResult(response.response.text() || "Failed to generate brief.");
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-pro",
+        contents: fullPrompt
+      });
+      setResult(response.text || "Failed to generate brief.");
     } catch (err) {
       setResult("Brief generation error.");
     } finally {
@@ -104,9 +110,11 @@ const AIMarketingSuite: React.FC = () => {
     setLoading(true);
     setResult(null);
     try {
-      const model = ai.getGenerativeModel({ model: "gemini-1.5-flash" });
-      const response = await model.generateContent(`Write 3 engaging Instagram and LinkedIn posts for a digital agency about this topic: "${prompt}". Include relevant hashtags and a call to action to visit kmwebdesign.xyz.`);
-      setResult(response.response.text() || "Failed to write posts.");
+      const response = await ai.models.generateContent({
+        model: "gemini-1.5-flash",
+        contents: `Write 3 engaging Instagram and LinkedIn posts for a digital agency about this topic: "${prompt}". Include relevant hashtags and a call to action to visit kmwebdesign.xyz.`
+      });
+      setResult(response.text || "Failed to write posts.");
     } catch (err) {
       setResult("Flash generation error.");
     } finally {
